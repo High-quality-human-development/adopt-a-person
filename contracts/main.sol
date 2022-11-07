@@ -1,8 +1,28 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
 
-// 需要一个ERC20 合约来当平台的钱
+contract main {
+    struct Organic {
+        string variety;
+        string benefit;
+        uint amount;
+        string img_url;
+    }
+    struct Combo {
+        uint index;
+        Organic _organic;
+        uint price;
+    }
 
-// 用户买： 
-// 扣款： 一部分直接转给公司；一部分抵押：抵押时间，抵押比例，退款触发条件
+    mapping (uint => Combo) public combos;
 
-// 退款：获取设备的人体数据，触发未改善条件 -> 退款
+    function get_combo(uint index) public view returns(Combo memory) {
+        return combos[index];
+    }
 
+    function add_combo(uint index, Combo memory new_combo) public payable returns(bool) {
+        combos[index] = new_combo;
+        return true;
+    }
+
+}
