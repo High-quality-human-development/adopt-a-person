@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-contract main {
+abstract contract main {
     struct Organic {
         string variety;
         string benefit;
@@ -9,10 +9,25 @@ contract main {
         uint amount;
     }
 
+    struct BloodPressure {
+        uint lower_limit;
+        uint upper_limit;
+    }
+
+    struct HeartRate {
+        uint lower_limit;
+        uint upper_limit;  
+    }
+
+    struct BloodOxygen {
+        uint lower_limit;
+        uint upper_limit;  
+    }
+
     struct ReferenceBodyData {
-        (uint, uint) blood_pressure;
-        (uint, uint) heart_rate;
-        (uint, uint) blood_oxygen;
+        BloodPressure blood_pressure;
+        HeartRate heart_rate;
+        BloodOxygen bolld_oxygen;
     }
 
     struct Combo {
@@ -27,11 +42,11 @@ contract main {
     uint combo_index;
     mapping (uint => Combo) public combos;
 
-    function get_combo(uint index) public view returns(Combo memory) {
+    function get_combo(uint index) public view virtual returns(Combo memory) {
 
     }
 
-    function add_combo(Combo memory new_combo) public payable returns(bool) {
+    function add_combo(Combo memory new_combo) public payable virtual returns(bool) {
 
     }
 
@@ -57,7 +72,7 @@ contract main {
     uint buy_tx;
     mapping (uint => BuyOrder) public buyOrders;
 
-    function buy(BuyArgs memory args) public payable returns BuyOrder {
+    function buy(BuyArgs memory args) public payable virtual returns (BuyOrder memory) {
 
     }
 
@@ -75,7 +90,7 @@ contract main {
     uint refund_tx;
     mapping (uint => RefundOrder) public refundOrders;
 
-    function refund(RefundArgs args) public payable returns RefundOrder {
+    function refund(RefundArgs memory args) public payable virtual returns (RefundOrder memory) {
 
     }
 
